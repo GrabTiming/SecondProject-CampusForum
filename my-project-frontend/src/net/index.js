@@ -23,7 +23,7 @@ function takeAccessToken() {
     const str = localStorage.getItem(authItemName) || sessionStorage.getItem(authItemName);
     if(!str) return null
     const authObj = JSON.parse(str)
-    if(new Date(authObj.expire) <= new Date()) {
+    if(authObj.expire <= new Date()) {
         deleteAccessToken()
         ElMessage.warning("登录状态已过期，请重新登录！")
         return null
@@ -99,4 +99,4 @@ function unauthorized() {
     return !takeAccessToken()
 }
 
-export { post, get, login, logout, unauthorized }
+export { post, get, login, logout, unauthorized, accessHeader }
