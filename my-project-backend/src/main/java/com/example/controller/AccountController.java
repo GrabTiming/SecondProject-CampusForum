@@ -3,11 +3,16 @@ package com.example.controller;
 import com.example.entity.RestBean;
 import com.example.entity.dto.Account;
 import com.example.entity.dto.AccountDetails;
+import com.example.entity.dto.AccountPrivacy;
 import com.example.entity.vo.AccountVo;
+import com.example.entity.vo.request.ChangePasswordVo;
 import com.example.entity.vo.request.DetailsSaveVo;
 import com.example.entity.vo.request.EmailModifyVo;
+import com.example.entity.vo.request.PrivacySaveVo;
 import com.example.entity.vo.response.AccountDetailsVo;
+import com.example.entity.vo.response.AccountPrivacyVo;
 import com.example.service.AccountDetailsService;
+import com.example.service.AccountPrivacyService;
 import com.example.service.AccountService;
 import com.example.utils.Const;
 import jakarta.annotation.Resource;
@@ -20,11 +25,17 @@ import java.util.Optional;
 @RequestMapping("/api/user")
 public class AccountController {
 
+    //用户服务
     @Resource
     private AccountService accountService;
 
+    //用户信息服务
     @Resource
     private AccountDetailsService accountDetailsService;
+
+    //用户隐私服务
+    @Resource
+    private AccountPrivacyService accountPrivacyService;
 
     /**
      * 获取当前用户信息
@@ -66,4 +77,34 @@ public class AccountController {
 
         return msg==null ? RestBean.success() :RestBean.failure(400,msg);
     }
+
+    /**
+     * 修改密码
+     */
+    @PostMapping("/change-password")
+    public RestBean<Void> ChangePasswd(@RequestAttribute(Const.ATTR_USER_ID) int id, @RequestBody @Valid ChangePasswordVo vo)
+    {
+        String msg =  accountService.changePassword(id,vo);
+
+        return msg==null ? RestBean.success() :RestBean.failure(400,msg);
+    }
+
+    /**
+     * 保存隐私设置
+     */
+    @PostMapping("/save-privacy")
+    public  RestBean<Void> savePrivacy(@RequestAttribute(Const.ATTR_USER_ID) int id,
+                                       @RequestBody @Valid PrivacySaveVo vo)
+    {
+        accountPrivacyService.savePrivacy(id,vo);
+        return RestBean.success();
+    }
+
+    @GetMapping("/privacy")
+    public  RestBean<AccountPrivacyVo> getPrivacy(@RequestAttribute(Const.ATTR_USER_ID) int id)
+    {
+        AccountPrivacyVo accountPrivacyVo = accountPrivacyService.getAccountPrivacyById(id).asViewObject(AccountPrivacyVo.class);
+        return RestBean.success(accountPrivacyVo);
+    }
+
 }

@@ -108,7 +108,7 @@ function savePrivacy(type, status){
                         <el-input type="password" :prefix-icon="Lock" v-model="form.new_password_repeat"
                                   placeholder="重新输入新密码" maxlength="16"/>
                     </el-form-item>
-                    <div style="text-align: center">
+                    <div style="text-align: right">
                         <el-button @click="resetPassword" :icon="Switch" type="success">立即重置密码</el-button>
                     </div>
                 </el-form>

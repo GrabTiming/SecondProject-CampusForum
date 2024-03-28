@@ -5,16 +5,14 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.entity.RestBean;
 import com.example.entity.dto.Account;
 import com.example.entity.vo.AccountVo;
-import com.example.entity.vo.request.ConfirmResetVO;
-import com.example.entity.vo.request.EmailModifyVo;
-import com.example.entity.vo.request.EmailRegisterVO;
-import com.example.entity.vo.request.EmailResetVO;
+import com.example.entity.vo.request.*;
 import com.example.mapper.AccountMapper;
 import com.example.service.AccountService;
 import com.example.utils.Const;
 import com.example.utils.FlowUtils;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -32,6 +30,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 账户信息处理相关服务
  */
+@Slf4j
 @Service
 public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> implements AccountService {
 
@@ -171,6 +170,30 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
                 .set("email",email)
                 .update();
         return "null";
+    }
+
+    /**
+     * 修改密码
+     * @param id
+     * @param vo 前端传过来的修改密码 页面数据
+     * @return
+     */
+    @Override
+    public String changePassword(int id, ChangePasswordVo vo) {
+
+        Account account = getById(id);
+        String oldPassword = vo.getPassword();
+
+        String newPassword = vo.getNew_password();
+        String newSecretPassword = passwordEncoder.encode(newPassword);
+        //不能取出来 用equals 判断是否相等，要用encoder 的 matches
+        if(passwordEncoder.matches(vo.getPassword(),account.getPassword()))
+        {
+            account.setPassword(newSecretPassword);
+            updateById(account);
+            return null;
+        }
+        else return "原密码错误，修改失败";
     }
 
     /**
