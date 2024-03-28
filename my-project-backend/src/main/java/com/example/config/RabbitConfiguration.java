@@ -16,4 +16,5 @@ public class RabbitConfiguration {
                 .durable("mail")
                 .build();
     }
+    //TODO 解决RabbitMq问题
 }

@@ -25,6 +25,7 @@ const searchInput = reactive({
 })
 const notification = ref([])
 
+// 获取当前用户信息
 get('/api/user/info', (data) => {
     store.user = data
     loading.value = false
@@ -53,7 +54,7 @@ function deleteAllNotification() {
     <div class="main-content" v-loading="loading" element-loading-text="正在进入，请稍后...">
         <el-container style="height: 100%" v-if="!loading">
             <el-header class="main-content-header">
-                <el-image class="logo" src="https://element-plus.org/images/element-plus-logo.svg"/>
+              <el-image class="logo" src="https://element-plus.org/images/element-plus-logo.svg"/>
                 <div style="flex: 1;padding: 0 20px;text-align: center">
                     <el-input v-model="searchInput.text" style="width: 100%;max-width: 500px"
                               placeholder="搜索论坛相关内容...">

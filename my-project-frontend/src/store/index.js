@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 
 export const useStore = defineStore('general', {
+    // 当前用户 公共信息
     state: () => {
         return {
             user: {

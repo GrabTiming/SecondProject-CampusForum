@@ -6,15 +6,20 @@ springdoc:
 spring:
   mail:
     host: smtp.163.com
-    username: javastudy111@163.com
-    password: VKQFYZMUSUZGSGEG
+    username: 13430249996@163.com
+    password: VITASOZMCTAJDQPI
+    #port: 465
   rabbitmq:
     addresses: localhost
     username: admin
     password: admin
-    virtual-host: /
+    virtual-host: /test
+  data:
+    redis:
+      port: 6379
+      host: localhost
   datasource:
-    url: jdbc:mysql://localhost:3306/test
+    url: jdbc:mysql://localhost:3306/campusforum
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver

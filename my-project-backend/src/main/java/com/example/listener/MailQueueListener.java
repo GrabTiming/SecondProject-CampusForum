@@ -1,5 +1,6 @@
 package com.example.listener;
 
+import com.example.entity.vo.request.EmailModifyVo;
 import jakarta.annotation.Resource;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -40,11 +41,17 @@ public class MailQueueListener {
                     createMessage("您的密码重置邮件",
                             "你好，您正在执行重置密码操作，验证码: "+code+"，有效时间3分钟，如非本人操作，请无视。",
                             email);
+            case "modify" ->
+                    createMessage("您的邮件修改验证邮件",
+                            "您好，您正在修改新的电子邮件地址，验证码："+code+", 有效时间3分钟，如非本人操作，请无视",
+                            email);
             default -> null;
         };
         if(message == null) return;
         sender.send(message);
     }
+
+
 
     /**
      * 快速封装简单邮件消息实体

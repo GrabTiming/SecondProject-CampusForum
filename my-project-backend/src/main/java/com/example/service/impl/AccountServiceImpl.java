@@ -2,8 +2,11 @@ package com.example.service.impl;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.example.entity.RestBean;
 import com.example.entity.dto.Account;
+import com.example.entity.vo.AccountVo;
 import com.example.entity.vo.request.ConfirmResetVO;
+import com.example.entity.vo.request.EmailModifyVo;
 import com.example.entity.vo.request.EmailRegisterVO;
 import com.example.entity.vo.request.EmailResetVO;
 import com.example.mapper.AccountMapper;
@@ -141,6 +144,33 @@ public class AccountServiceImpl extends ServiceImpl<AccountMapper, Account> impl
         if(code == null) return "请先获取验证码";
         if(!code.equals(info.getCode())) return "验证码错误，请重新输入";
         return null;
+    }
+
+    @Override
+    public Account findAccountById(int id) {
+
+        return this.query().eq("id",id).one();
+
+    }
+
+    @Override
+    public String modifyEmail(int id, EmailModifyVo vo) {
+        String email = vo.getEmail();
+        String code = getEmailVerifyCode(email);
+        if(code==null) return "请先获取验证码";
+
+        if(!code.equals(vo.getCode())) return "验证码输入错误";
+        this.deleteEmailVerifyCode(vo.getEmail());
+
+        Account account = this.findAccountByNameOrEmail(email);
+        if(account!=null&& account.getId()!=id) {
+           return "此邮箱已被绑定，请输入其他邮箱";
+        }
+        this.update()
+                .eq("id",id)
+                .set("email",email)
+                .update();
+        return "null";
     }
 
     /**
