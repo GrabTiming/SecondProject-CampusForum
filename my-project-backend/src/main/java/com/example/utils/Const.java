@@ -23,4 +23,20 @@ public final class Const {
     //用户角色
     public final static String ROLE_DEFAULT = "user";
 
+    //论坛相关
+    public static final String FORUM_IMAGE_COUNTER = "forum:image:";
+    //短时间创建帖子的关键字
+    public static final String FORUM_TOPIC_CREATE_COUNTER = "forum:topic:create";
+
+    //预览
+    public static final String FORUM_TOPIC_PREVIEW = "forum:topic:create";
+
+
+    //存储图片云服务的地址址
+    public static final String OSS_UPLOAD_ADDRESS = "http://sb25f7liq.hn-bkt.clouddn.com/";
+
+    //评论关键字
+    public static final String FORUM_TOPIC_COMMENT_COUNTER  = "forum:topic:comment";
+
+
 }

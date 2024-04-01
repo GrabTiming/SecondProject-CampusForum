@@ -33,6 +33,8 @@ const rules = {
         { validator: validatePassword, trigger: ['blur', 'change'] },
     ]
 }
+
+
 const formRef = ref()
 const valid = ref(false)
 const onValidate = (prop, isValid) => valid.value = isValid

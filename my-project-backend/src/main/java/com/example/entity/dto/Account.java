@@ -16,11 +16,19 @@ import java.util.Date;
 @TableName("db_account")
 @AllArgsConstructor
 public class Account implements BaseData {
+
     @TableId(type = IdType.AUTO)
     Integer id;
+    //用户名
     String username;
+    //密码
     String password;
+    //邮箱
     String email;
+    //后续处理的角色 还没用上
     String role;
+    //注册时间
     Date registerTime;
+    //头像
+    String avatar;
 }

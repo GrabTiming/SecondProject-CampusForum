@@ -9,6 +9,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * 用户信息表
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,14 +22,16 @@ public class AccountDetails implements BaseData  {
     @TableId(type = IdType.AUTO)
     private Integer id;
     //性别(1男2女)
-    private int gender;
+    private int gender ;
     //电话号码
     private String phone;
     //qq号
-    private String qq;
+    private String qq ;
     //微信号
-    private String wx;
+    private String wx ;
     //用户简介信息
-    private String description;
+    private String description ;
+
+
 
 }

@@ -73,7 +73,7 @@ function updateTopic(editor) {
 function loadComments(page) {
     topic.comments = null
     topic.page = page
-    get(`/api/forum/comments?tid=${tid}&page=${page - 1}`, data => topic.comments = data)
+    get(`/api/forum/comments?tid=${tid}&page=${page-1}`, data => topic.comments = data)
 }
 
 function onCommentAdd() {
@@ -129,7 +129,7 @@ function deleteComment(id) {
                 <div class="topic-content" v-html="convertToHtml(topic.data.content)"></div>
                 <el-divider/>
                 <div style="font-size: 13px;color: grey;text-align: center">
-                    <div>发帖时间: {{new Date(topic.data.time).toLocaleString()}}</div>
+                    <div>发帖时间: {{new Date(topic.data.createTime).toLocaleString()}}</div>
                 </div>
                 <div style="text-align: right;margin-top: 30px">
                     <interact-button name="编辑帖子" color="dodgerblue" :check="false"
@@ -175,7 +175,7 @@ function deleteComment(id) {
                     </div>
                     <div class="topic-main-right">
                         <div style="font-size: 13px;color: grey">
-                            <div>评论时间: {{new Date(item.time).toLocaleString()}}</div>
+                            <div>评论时间: {{new Date(item.createTime).toLocaleString()}}</div>
                         </div>
                         <div v-if="item.quote" class="comment-quote">
                             回复: {{item.quote}}
@@ -191,7 +191,7 @@ function deleteComment(id) {
                 </div>
                 <div style="width: fit-content;margin: 20px auto">
                     <el-pagination background layout="prev, pager, next"
-                                   v-model:current-page="topic.page" @current-change="loadComments"
+                                   v-model:current-page="topic.pageNum" @current-change="loadComments"
                                    :total="topic.data.comments" :page-size="10"
                                     hide-on-single-page/>
                 </div>

@@ -44,3 +44,7 @@ spring:
       origin: '*'
       credentials: false
       methods: '*'
+myoss:
+  accessKey: CS_jH9ctQU7U9Y9q2W2DM3eOmP6rMo3XzukFGClJ
+  secretKey: MOHnATgwjmN0KcB34X28BXq0u1LRwVkC_JdNTVR3
+  bucket: liangjt-campusforum1

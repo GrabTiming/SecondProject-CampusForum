@@ -5,6 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
+
+/**
+ * 验证码
+ */
 @Data
 @AllArgsConstructor
 public class ConfirmResetVO {

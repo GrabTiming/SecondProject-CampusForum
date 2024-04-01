@@ -138,7 +138,7 @@ navigator.geolocation.getCurrentPosition(position => {
                                     <div style="font-size: 12px;color: grey">
                                         <el-icon><Clock/></el-icon>
                                         <div style="margin-left: 2px;display: inline-block;transform: translateY(-2px)">
-                                            {{new Date(item.time).toLocaleString()}}
+                                            {{new Date(item.createTime).toLocaleString()}}
                                         </div>
                                     </div>
                                 </div>
