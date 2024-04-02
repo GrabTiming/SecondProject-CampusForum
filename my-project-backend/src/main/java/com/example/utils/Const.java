@@ -34,7 +34,7 @@ public final class Const {
     public static final String FORUM_TOPIC_PREVIEW = "forum:topic:create";
 
 
-    //存储图片云服务的地址址
+    //存储图片云服务的地址
     public static final String OSS_UPLOAD_ADDRESS = "http://sb25f7liq.hn-bkt.clouddn.com/";
 
     //评论关键字

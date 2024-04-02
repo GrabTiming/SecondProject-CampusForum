@@ -6,8 +6,8 @@ springdoc:
 spring:
   mail:
     host: smtp.163.com
-    username: 13430249996@163.com
-    password: VITASOZMCTAJDQPI
+    username: 13430249997@163.com
+    password: VITASOZMCTAJDQPIK
     #port: 465
   rabbitmq:
     addresses: localhost
@@ -44,6 +44,7 @@ spring:
       origin: '*'
       credentials: false
       methods: '*'
+# 七牛云的相关配置
 myoss:
   accessKey: CS_jH9ctQU7U9Y9q2W2DM3eOmP6rMo3XzukFGClJ
   secretKey: MOHnATgwjmN0KcB34X28BXq0u1LRwVkC_JdNTVR3
