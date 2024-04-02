@@ -11,6 +11,7 @@ import java.util.Date;
 @NoArgsConstructor
 public class AccountVo {
 
+    private Integer id;
     private String username;
     private String email;
     private String role;

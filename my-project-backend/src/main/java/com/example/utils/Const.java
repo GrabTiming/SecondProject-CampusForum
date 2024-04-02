@@ -25,6 +25,8 @@ public final class Const {
 
     //论坛相关
     public static final String FORUM_IMAGE_COUNTER = "forum:image:";
+
+
     //短时间创建帖子的关键字
     public static final String FORUM_TOPIC_CREATE_COUNTER = "forum:topic:create";
 

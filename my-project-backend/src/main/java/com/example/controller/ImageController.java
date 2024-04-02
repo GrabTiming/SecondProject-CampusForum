@@ -4,6 +4,7 @@ import com.example.entity.RestBean;
 import com.example.service.OssUploadService;
 import com.example.utils.Const;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,11 +23,12 @@ public class ImageController {
         return uploadService.uploadAvatar(id,avatar);
     }
 
-//    @PostMapping("/image")
-//    public RestBean<String> uploadImage(@RequestParam("file") MultipartFile avatar,
-//                                         @RequestAttribute(Const.ATTR_USER_ID) int id)
-//    {
-//        return uploadService.uploadArticleImg(id,avatar);
-//    }
+    @PostMapping("/cache")
+    public RestBean<String> uploadImage(@RequestParam("file") MultipartFile file,
+                                         @RequestAttribute(Const.ATTR_USER_ID) int id,
+                                          HttpServletResponse response)
+    {
+        return uploadService.uploadArticleImg(id,file);
+    }
 
 }

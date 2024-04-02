@@ -107,7 +107,6 @@ public class OssUploadServiceImpl implements OssUploadService {
 
         BucketManager bucketManager = new BucketManager(auth, cfg);
 
-
         String key = avatar.substring(Const.OSS_UPLOAD_ADDRESS.length());
         log.info(key);
         try {
@@ -146,8 +145,7 @@ public class OssUploadServiceImpl implements OssUploadService {
                 //解析上传成功的结果
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
                 //得到图片网址
-                String url = Const.OSS_UPLOAD_ADDRESS+key;
-                return url;
+                return Const.OSS_UPLOAD_ADDRESS+key;
 
             } catch (QiniuException ex) {
                 Response r = ex.response;
@@ -155,16 +153,18 @@ public class OssUploadServiceImpl implements OssUploadService {
                 try {
                     System.err.println(r.bodyString());
                 } catch (QiniuException ex2) {
-                    log.error("{ }",ex2);
+                    log.error("七牛云服务出现问题"+ex2.getMessage() ,ex2);
+
                 }
             }
         }catch (Exception e) {
-            log.error("{ }",e);
+            log.error("出现问题"+e.getMessage(),e);
         }
         return null;
     }
 
 
+    //上传 文章 图片
     @Override
     public RestBean<String> uploadArticleImg(int id, MultipartFile img) {
 
@@ -174,10 +174,11 @@ public class OssUploadServiceImpl implements OssUploadService {
         }
 
         String key = Const.FORUM_IMAGE_COUNTER+id;//Redis存的请求key
-
-        if(flowUtils.limitPeriodCheck(key,20,3600))
+        System.out.println(key);
+        if(flowUtils.limitPeriodCheck(key,20,3600))//一小时内不超过20张图片
         {
-            return null;
+            System.out.println("不通过");
+            return RestBean.failure(400,"图片插入频繁，请一个小时后再试");
         }
 
         String filePath = PathUtils.generateFilePath(img.getOriginalFilename());

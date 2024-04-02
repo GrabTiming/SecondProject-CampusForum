@@ -94,6 +94,7 @@ public class FlowUtils {
             int c = Integer.parseInt(count);
             if(value != c + 1)
                 template.expire(key, period, TimeUnit.SECONDS);
+            System.out.println(value +" "+frequency);
             return action.run(value > frequency);
         }
         else {

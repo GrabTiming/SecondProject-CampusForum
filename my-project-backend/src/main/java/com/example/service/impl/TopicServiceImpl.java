@@ -87,11 +87,12 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
         {
             return "文章类型非法";
         }
-        String key = Const.FORUM_TOPIC_CREATE_COUNTER+ id;
-        if(!flowUtils.limitPeriodCheck(key,3,600))//10分钟内发三个帖子
-        {
-            return "操作频繁，请稍后重试";
-        }
+        String key = Const.FORUM_TOPIC_CREATE_COUNTER+ ":"+id;
+        System.out.println(key);
+//        if(flowUtils.limitPeriodCheck(key,3,600))//10分钟内发三个帖子
+//        {
+//            return "操作频繁，请稍后重试";
+//        }
         Topic topic = new Topic();
         BeanUtils.copyProperties(topicCreateVo,topic);
         topic.setContent(topicCreateVo.getContent().toJSONString());
@@ -196,7 +197,7 @@ public class TopicServiceImpl extends ServiceImpl<TopicMapper, Topic> implements
                 .eq("uid",uid)
                 .eq("id",vo.getId())
                 .set("title",vo.getTitle())
-                .set("content",vo.getContent())
+                .set("content",vo.getContent().toString())
                 .set("type",vo.getType()));
         return null;
 

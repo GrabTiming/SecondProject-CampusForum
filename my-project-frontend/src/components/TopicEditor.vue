@@ -127,10 +127,10 @@ const editorOption = {
             name: 'file',
             size: 5,
             loading: true,
-            accept: 'image/png, image/jpeg',
+            // accept: 'image/png, image/jpg',
             response: (resp) => {
                 if(resp.data) {
-                    return axios.defaults.baseURL + '/images' + resp.data
+                    return resp.data;
                 } else {
                     return null
                 }
